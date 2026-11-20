@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Experiência mobile dedicada: player e estações, sem ferramentas administrativas. */
+.mobile-player-shell { display: none; }
+@media (max-width: 639px) {
+  .desktop-admin-shell { display: none; }
+  .mobile-player-shell { display: block; min-height: 100svh; }
+  html, body, #root { min-height: 100%; margin: 0; background: #090b10; }
+  body { -webkit-tap-highlight-color: transparent; }
+}
+.mobile-radio-app {
+  min-height: 100svh; box-sizing: border-box; padding: max(26px, env(safe-area-inset-top)) 22px max(24px, env(safe-area-inset-bottom));
+  color: #f7f7fb; background: radial-gradient(ellipse at 50% 5%, #263044 0%, #111722 36%, #090b10 76%);
+  font-family: var(--font-sans); overflow: hidden;
+}
+.mobile-radio-header { display:flex; align-items:center; justify-content:space-between; max-width:520px; margin:0 auto 28px; }
+.mobile-brand { display:flex; align-items:center; gap:9px; font-size:13px; font-weight:800; letter-spacing:.19em; }
+.mobile-brand svg { color:#c6d3ed; }
+.mobile-live-label { display:flex; align-items:center; gap:7px; color:#aab4c6; font-size:9px; letter-spacing:.14em; }
+.mobile-live-label span { width:6px;height:6px;border-radius:50%;background:#64d69b;box-shadow:0 0 10px #64d69b; }
+.mobile-now-playing { max-width:440px; margin:0 auto; text-align:center; }
+.mobile-album-art { position:relative; display:flex; align-items:center; justify-content:center; width:min(68vw,280px); aspect-ratio:1; margin:0 auto 27px; overflow:hidden; border:1px solid #ffffff24; border-radius:30px; color:#dce7ff; background:linear-gradient(145deg,#596b8c 0%,#27354e 43%,#111827 100%); box-shadow:0 22px 65px #0009,inset 0 1px #ffffff30; }
+.mobile-album-art:before { content:"";position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle,#a9c4f333,#9db6ed08 60%,transparent 70%); }
+.mobile-album-art > svg { z-index:2; filter:drop-shadow(0 5px 15px #0008); }
+.mobile-album-art.ford-emblem { border-radius:50%; background:radial-gradient(circle at 50% 35%,#233c65,#071329 72%); border-color:#a9c7f477; box-shadow:0 22px 65px #000b,0 0 35px #6da8ff24,inset 0 1px #ffffff55; }
+.mobile-album-art.ford-emblem img { display:block; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+.mobile-album-art > span { position:absolute; font-size:100px;font-weight:800;letter-spacing:-.1em;opacity:.10; }
+.art-orbit { position:absolute; width:75%;aspect-ratio:1;border:1px solid #dce7ff22;border-radius:50%; }
+.orbit-two { width:54%; }
+.mobile-track-meta .eyebrow,.eyebrow { color:#9ba8bc;font-size:9px;font-weight:700;letter-spacing:.19em; }
+.mobile-track-meta h1 { margin:8px 0 4px;font-size:clamp(22px,6vw,29px);font-weight:750;letter-spacing:-.045em; }
+.mobile-track-meta p { margin:0;color:#a3adbd;font-size:13px; }
+.mobile-player-controls { display:flex;align-items:center;justify-content:center;gap:25px;margin:25px 0 15px; }
+.glass-control { display:grid;place-items:center;color:#f7f9ff;border:1px solid #ffffff28;background:linear-gradient(145deg,#ffffff24,#ffffff09);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:inset 0 1px #ffffff35,0 10px 24px #0005;transition:transform .15s,background .15s; }
+.glass-control:active { transform:scale(.94);background:#ffffff30; }
+.glass-control:disabled { opacity:.4; }
+.glass-control.secondary { width:54px;height:54px;border-radius:50%; }
+.glass-control.primary { width:70px;height:70px;border-radius:50%;background:linear-gradient(145deg,#ffffff38,#ffffff14); }
+.mobile-playing-status { min-height:20px;display:flex;align-items:center;justify-content:center;gap:9px;color:#9ca8ba;font-size:11px; }
+.mobile-stations-section { max-width:520px;margin:34px auto 0; }
+.mobile-section-heading { display:flex;align-items:end;justify-content:space-between;margin-bottom:12px; }
+.mobile-section-heading h2 { margin:3px 0 0;font-size:22px;letter-spacing:-.04em; }
+.mobile-section-heading > span { color:#7f8ba0;font:11px var(--font-mono); }
+.mobile-station-list { overflow:hidden;border:1px solid #ffffff16;border-radius:19px;background:#ffffff08;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px); }
+.mobile-station-row { display:flex;width:100%;align-items:center;gap:12px;padding:13px 14px;text-align:left;color:#f2f4fa;background:transparent;border:0;border-bottom:1px solid #ffffff10; }
+.mobile-station-row:last-child { border-bottom:0; }
+.mobile-station-row.selected { background:linear-gradient(90deg,#a9c5f51c,#ffffff05); }
+.station-index { width:17px;color:#758197;font:10px var(--font-mono); }
+.station-disc { display:grid;place-items:center;width:38px;height:38px;border-radius:12px;color:#c6d7f5;background:linear-gradient(145deg,#ffffff20,#ffffff08);border:1px solid #ffffff18; }
+.station-copy { display:flex;flex:1;min-width:0;flex-direction:column;gap:3px; }
+.station-copy strong { overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:650; }
+.station-copy small { color:#9ba6b8;font-size:10px; }
+.station-action { display:grid;place-items:center;width:25px;color:#cbd6e8; }
+.mobile-empty { padding:18px;color:#aab4c6;font-size:12px; }
+.mobile-footer { margin:25px auto 0;text-align:center;color:#677286;font-size:8px;font-weight:700;letter-spacing:.2em; }
+.mobile-footer span { padding:0 6px;color:#9caac0; }
+.equalizer { display:inline-flex;align-items:center;gap:2px;height:14px; }
+.equalizer i { display:block;width:2px;height:5px;border-radius:2px;background:#9eacc3; }
+.equalizer.active i { background:#9dc3ff;animation:eq 650ms ease-in-out infinite alternate; }
+.equalizer.active i:nth-child(2) { animation-delay:180ms;height:11px; }
+.equalizer.active i:nth-child(3) { animation-delay:320ms;height:8px; }
+.equalizer.active i:nth-child(4) { animation-delay:90ms;height:12px; }
+@keyframes eq { from { transform:scaleY(.45); } to { transform:scaleY(1.2); } }
+@media (prefers-reduced-motion: reduce) { .equalizer.active i { animation:none; } }

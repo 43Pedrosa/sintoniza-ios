@@ -1,0 +1,6 @@
+{
+  "name": "Sintoniza — Gerenciador de Rádios",
+  "description": "Painel web minimalista para cadastro de estações de rádio e player nativo iOS com reprodução em segundo plano e integração Bluetooth automotiva.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
