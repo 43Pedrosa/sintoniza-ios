@@ -1,4 +1,4 @@
-name: Build iOS unsigned IPA
+name: Build Sintoniza iOS unsigned IPA
 
 on:
   workflow_dispatch:
@@ -19,8 +19,14 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+      - name: Select and verify Xcode 26.2
+        run: |
+          set -euo pipefail
+          if [ -d /Applications/Xcode_26.2.app/Contents/Developer ]; then
+            sudo xcode-select -s /Applications/Xcode_26.2.app/Contents/Developer
+          fi
+          xcodebuild -version
+          xcrun --sdk iphoneos --show-sdk-version
 
       - name: Install XcodeGen
         run: brew install xcodegen
@@ -49,14 +55,14 @@ jobs:
           APP_PATH="$RUNNER_TEMP/DerivedData/Build/Products/Release-iphoneos/RadioPlayer.app"
           test -d "$APP_PATH"
           mkdir -p "$RUNNER_TEMP/ipa/Payload"
-          ditto "$APP_PATH" "$RUNNER_TEMP/ipa/Payload/RadioPlayer.app"
+          ditto "$APP_PATH" "$RUNNER_TEMP/ipa/Payload/Sintoniza.app"
           cd "$RUNNER_TEMP/ipa"
           /usr/bin/zip -qry "$GITHUB_WORKSPACE/Sintoniza-unsigned.ipa" Payload
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Sintoniza-unsigned-IPA
+          name: Sintoniza-iOS-26.2-unsigned-IPA
           path: Sintoniza-unsigned.ipa
           if-no-files-found: error
           retention-days: 7
