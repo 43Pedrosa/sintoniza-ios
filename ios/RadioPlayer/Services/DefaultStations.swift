@@ -36,6 +36,13 @@ enum DefaultStations {
             city: "São Paulo - SP",
             streamUrl: "https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_89FM_ADP.m3u8?dist=site-89fm",
             position: 4
+        ),
+        RadioStation(
+            id: "station-6-radio-maresia-de-torres",
+            name: "Rádio Maresia de Torres",
+            city: "Torres - RS",
+            streamUrl: "https://cast7.midiazdx.com.br:6930/stream",
+            position: 5
         )
     ]
 }
